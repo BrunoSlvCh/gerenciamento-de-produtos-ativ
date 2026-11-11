@@ -28,6 +28,7 @@ Atividade acadêmica Programação em Scripts: sistema de cadastro de produtos, 
 - `conexao.php`: conexão com o banco de dados
 - `style.css`: estilos das telas
 - `banco.sql`: script de criação do banco e das tabelas
+- `dados_exemplo.sql`: produtos de exemplo para testar o sistema (opcional)
 
 ## Como executar
 
