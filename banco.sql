@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS db_loja CHARACTER SET utf8;
+
+USE db_loja;
+
+CREATE TABLE IF NOT EXISTS tb_produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    compra DECIMAL(10,2) NOT NULL,
+    venda DECIMAL(10,2) NOT NULL,
+    estoque INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tb_vendas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    valor_venda DECIMAL(10,2) NOT NULL,
+    valor_compra DECIMAL(10,2) NOT NULL,
+    data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

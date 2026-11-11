@@ -1,0 +1,103 @@
+<?php
+    include 'conexao.php';
+
+    if (isset($_GET["txt_busca"])) {
+        $busca = $_GET["txt_busca"];
+        $sql = mysqli_query($conexao, "SELECT id, descricao, categoria, venda, (venda - compra) AS lucro, estoque FROM tb_produtos WHERE descricao LIKE '%$busca%' OR categoria LIKE '%$busca%' ORDER BY descricao ASC");
+    } else {
+        $busca = "";
+        $sql = mysqli_query($conexao, "SELECT id, descricao, categoria, venda, (venda - compra) AS lucro, estoque FROM tb_produtos ORDER BY descricao ASC");
+    }
+?>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastro de Produto</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<form action="gravar.php" method="POST" name="produto">
+			<h2>📦 Cadastro de Produto</h2>
+
+			<table class="form" width="100%" border="0">
+				<tr>
+					<td width="25%"><b>Descrição</b></td>
+					<td width="25%"><b>Categoria</b></td>
+					<td width="25%"><b>Valor Compra (R$)</b></td>
+					<td width="25%"><b>Valor Venda (R$)</b></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="txt_descricao" maxlength="100"></td>
+					<td>
+						<select name="sel_categoria">
+							<option value="Informática">Informática</option>
+							<option value="Eletrônicos">Eletrônicos</option>
+							<option value="Periféricos">Periféricos</option>
+							<option value="Acessórios">Acessórios</option>
+						</select>
+					</td>
+					<td><input type="text" name="txt_compra"></td>
+					<td><input type="text" name="txt_venda"></td>
+				</tr>
+				<tr>
+					<td style="padding-top: 14px;"><b>Qtd. Estoque</b></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="txt_estoque" class="centro"></td>
+					<td colspan="3"></td>
+				</tr>
+			</table>
+
+			<input type="submit" class="btn" name="btn_cadastrar" value="CADASTRAR PRODUTO">
+			<input type="button" class="btn" name="btn_vender" value="VENDER PRODUTO" onclick="window.location='vender.php'">
+		</form>
+
+		<table class="titulo-inventario" width="100%" border="0">
+			<tr>
+				<td><h2>📋 Inventário</h2></td>
+				<td align="right">
+					<form action="cadastro_produto.php" method="GET" name="busca">
+						<input type="text" name="txt_busca" class="busca" placeholder="pesquisar por descrição ou categoria" value="<?php echo $busca; ?>">
+						<button type="submit" class="btn-busca">🔍</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+
+		<table class="lista" width="100%" border="0">
+			<tr>
+				<th align="left">Descrição</th>
+				<th align="left">Categoria</th>
+				<th align="left">Venda</th>
+				<th align="left">Lucro Unit.</th>
+				<th>Estoque</th>
+				<th>Ações</th>
+			</tr>
+
+			<?php if (mysqli_num_rows($sql) == 0) { ?>
+			<tr>
+				<td colspan="6" align="center">Nenhum produto encontrado.</td>
+			</tr>
+			<?php } ?>
+
+			<?php while ($linha = mysqli_fetch_assoc($sql)) { ?>
+			<tr>
+				<td><?php echo $linha["descricao"]; ?></td>
+				<td><?php echo $linha["categoria"]; ?></td>
+				<td>R$ <?php echo str_replace(".", ",", $linha["venda"]); ?></td>
+				<td>R$ <?php echo str_replace(".", ",", $linha["lucro"]); ?></td>
+				<td align="center"><?php echo $linha["estoque"]; ?></td>
+				<td align="center"><a href="excluir.php?id=<?php echo $linha["id"]; ?>" class="excluir">❌</a></td>
+			</tr>
+			<?php } ?>
+		</table>
+
+	</div>
+
+</body>
+</html>
