@@ -1,4 +1,4 @@
-# Cadastro de Produtos
+# Gerenciamento de Produtos
 
 Atividade acadêmica Programação em Scripts: sistema de cadastro de produtos, inventário com busca e registro de vendas, feito com HTML, CSS e PHP, usando banco de dados MySQL.
 
