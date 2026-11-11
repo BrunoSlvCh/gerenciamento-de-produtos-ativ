@@ -34,9 +34,10 @@ Atividade acadêmica Programação em Scripts: sistema de cadastro de produtos, 
 1. Instale e abra o USBWebserver, com o Apache e o MySQL ligados.
 2. Acesse o phpMyAdmin (`http://localhost:8080/phpmyadmin`) com o usuário `root` e a senha `usbw`.
 3. Na aba **SQL**, execute o conteúdo do arquivo `banco.sql`.
-4. Copie os arquivos do projeto para uma pasta dentro de `usbwebserver/root`, por exemplo `INDEX`.
-5. Acesse `http://localhost:8080/INDEX/cadastro_produto.php` no navegador.
-
+4. (Opcional) Execute também o `dados_exemplo.sql` para cadastrar produtos de exemplo.
+5. Copie os arquivos do projeto para uma pasta dentro de `usbwebserver/root`, por exemplo `INDEX`.
+6. Acesse `http://localhost:8080/INDEX/cadastro_produto.php` no navegador.
+   
 ## Configuração do banco
 
 Os dados de conexão ficam no arquivo `conexao.php`:
